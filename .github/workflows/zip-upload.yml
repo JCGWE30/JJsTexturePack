@@ -23,7 +23,7 @@ jobs:
         path: pack.zip
 
   upload:
-    needs: build
+    needs: zip
     runs-on: ubuntu-latest
     steps:
 
