@@ -15,8 +15,8 @@ jobs:
 
     - name: Move into pack folder
       run: |
-      cd pack
-      ls -la
+        cd pack
+        ls -la
 
     - name: Zip pack
       run: zip -r pack.zip *
