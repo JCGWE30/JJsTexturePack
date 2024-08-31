@@ -20,7 +20,7 @@ jobs:
       run: zip -r pack.zip *
     
     - name: Move pack back out
-      run: | 
+      run: |
       mv pack.zip ../pack.zip
       cd ..
 
