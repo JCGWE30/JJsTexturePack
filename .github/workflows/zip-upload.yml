@@ -13,8 +13,16 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
+    - name: Move into pack folder
+      run: cd pack
+
     - name: Zip pack
-      run: zip -r pack.zip pack/ -i "pack/"
+      run: zip -r pack.zip *
+    
+    - name: Move pack back out
+      run: | 
+      mv pack.zip ../pack.zip
+      cd ..
 
     - name: Upload ZIP artifact
       uses: actions/upload-artifact@v3
