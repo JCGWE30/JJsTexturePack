@@ -1,0 +1,54 @@
+name: Build and Update
+
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Zip pack
+      run: |
+        cd pack
+        zip -r pack.zip *
+        mv pack.zip ../pack.zip
+        cd ..
+        ls -la
+
+    - name: Upload ZIP artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: pack
+        path: pack.zip
+
+  upload:
+    needs: zip
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Download ZIP artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: pack
+    
+    - name: Configure Git
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+
+    - name: Commit and push changes
+      run: |
+        git add pack.zip
+        git commit -m "Update texture pack"
+        git push origin HEAD
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
