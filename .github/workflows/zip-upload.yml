@@ -28,9 +28,10 @@ jobs:
 
     - name: Commit and push changes
       run: |
+        git checkout pack-server
         git add pack.zip
         git commit -m "Update texture pack"
-        git push origin HEAD
+        git push origin pack-server
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
