@@ -27,7 +27,8 @@ jobs:
 
     - name: Commit and push changes
       run: |
-        git checkout pack-server || git checkout -b pack-server
+        git push origin --delete pack-server
+        git checkout -b pack-server
         git add pack.zip
         git commit -m "Update texture pack"
         git push origin pack-server
