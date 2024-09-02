@@ -19,7 +19,6 @@ jobs:
         zip -r pack.zip *
         mv pack.zip ../pack.zip
         cd ..
-        ls -la
 
     - name: Configure Git
       run: |
@@ -28,7 +27,7 @@ jobs:
 
     - name: Commit and push changes
       run: |
-        git checkout pack-server
+        git checkout pack-server || git checkout -b pack-server
         git add pack.zip
         git commit -m "Update texture pack"
         git push origin pack-server
