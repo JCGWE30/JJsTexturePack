@@ -36,4 +36,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Send message to server
-      run: curl -X POST -d "§a[JJsTextures] §eThe texture pack has been updated by §6${{ github.actor }} §ewith changes §6${{ github.event.head_commit.message }}. §eRejoin for the new effects!" "${{ secrets.SERVER_LISTENER }}"
+      run: curl -X POST -d "${{ github.actor }},${{ github.event.head_commit.message }}" "${{ secrets.SERVER_LISTENER }}"
